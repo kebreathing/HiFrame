@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="./css/frame.css"/>
+    <style>
+      body {
+        margin: 0;
+        padding: 0px;
+        width: 100%;
+        min-height: 100%;
+      }
+
+      .parent-view {
+        position: relative;
+        margin: 0 auto;
+        width: 90%;
+        height: 90%;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent-view" id="parent"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.js"
+			  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+			  crossorigin="anonymous"></script>
+    <script src="./js/frame.js"></script>
+    <script>
+      // var frame = new DraggableFrame("frame", "parent")
+      // frame.init()
+      // frame.setCSS({
+      //   'top': '100px',
+      //   'left': '200px'
+      // })
+      var manager = new FrameManager()
+      manager.createFrame('frame', 'parent', {'top': '50px', 'left': '100px'})
+      manager.createFrame('frame1', 'parent', {'top': '200px', 'left': '300px'})
+    </script>
+  </body>
+</html>

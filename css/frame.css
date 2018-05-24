@@ -1,0 +1,61 @@
+/* css of Draggable Frame */
+.draggable-frame {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  /*transform: translate(-50%, -50%);*/
+  width: 100px;
+  height: 100px;
+  visibility: hidden;
+}
+
+.draggable-frame {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(102, 102, 102, 1);
+}
+
+.draggable-frame .dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid black;
+  border-radius: 100%;
+}
+
+.draggable-frame .focus-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s line;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background-color: wheat;
+    z-index: 5;
+    visibility: hidden;
+}
+
+.draggable-frame > #dot1 {
+  top: -3px;
+  left: -3px;
+  cursor: nw-resize;
+}
+
+.draggable-frame > #dot2 {
+  top: -3px;
+  right: -3px;
+  cursor: ne-resize;
+}
+
+.draggable-frame > #dot3 {
+  bottom: -3px;
+  left: -3px;
+  cursor: sw-resize;
+}
+
+.draggable-frame > #dot4 {
+  bottom: -3px;
+  right: -3px;
+  cursor: se-resize;
+}
