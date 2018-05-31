@@ -29,21 +29,25 @@
 .frame > .dot-lu {
   top: -0.428rem;
   left: -0.428rem;
+  cursor: nw-resize;
 }
 
 .frame > .dot-ru {
   top: -0.428rem;
   right: -0.428rem;
+  cursor: ne-resize;
 }
 
 .frame > .dot-lb {
   bottom: -0.428rem;
   left: -0.428rem;
+  cursor: sw-resize;
 }
 
 .frame > .dot-rb {
   bottom: -0.428rem;
   right: -0.428rem;
+  cursor: se-resize;
 }
 
 .frame > .layer {

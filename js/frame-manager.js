@@ -190,8 +190,3 @@ function onUpperFrame (e) {
 function onLowerFrame (e) {
   manager.modifyFrameLayer(-1)
 }
-
-$(document).ready(function () {
-  // var manager = new FrameManager("parent")
-  // manager.initEventListener()
-})

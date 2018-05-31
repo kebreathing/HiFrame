@@ -110,7 +110,7 @@ class Frame {
   setZIndex (value) {
     let zindex = _int(this.el.css('z-index')) + value
 
-    if (value < 0) {
+    if (zindex < 0) {
       return
     }
 
