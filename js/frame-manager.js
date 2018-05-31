@@ -190,3 +190,8 @@ function onUpperFrame (e) {
 function onLowerFrame (e) {
   manager.modifyFrameLayer(-1)
 }
+
+function onPopDialog (e) {
+  var dialog = new Dialog('提示', '手动框选功能尚未开通！')
+  dialog.create()
+}

@@ -13,7 +13,7 @@
         </div>
         <div class="control-view">
           <button class="control-btn" onclick="onCreateFrame(this)">新建</button>
-          <button class="control-btn c-yellow">手动框选</button>
+          <button class="control-btn c-yellow" onclick="onPopDialog(this)">手动框选</button>
           <button class="control-btn c-red" onclick="onDeleteFrame(this)">删除</button>
           <button class="control-btn" id="btn-fix" onclick="onFixFrame(this)">位置锁定</button>
           <button class="control-btn" id="btn-lock" onclick="onLockFrame(this)">大小锁定</button>
@@ -37,9 +37,9 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
+    <script src="./js/dialog.js"></script>
     <script src="./js/frame.js"></script>
     <script src="./js/frame-manager.js"></script>
-    <script src="./js/index.js"></script>
     <script>
       var manager = new FrameManager("parent")
       manager.initEventListener()
