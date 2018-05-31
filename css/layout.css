@@ -1,0 +1,109 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+body {
+  font-size: 14px;
+  background: #F0F2F5;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+footer {
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-outline: none;
+  outline: none;
+  border: none;
+}
+
+.outter-container {
+  width: 100%;
+}
+
+.outter-container .inner-container {
+  position: relative;
+  width: 73.14rem;
+  margin: 0 auto;
+  margin-top: 2.28rem;
+}
+
+.inner-container .frame-view {
+  width: 30rem;
+  height: 30rem;
+  margin: 0 auto;
+}
+
+.frame-view {
+  position: relative;
+}
+
+.inner-container .control-view {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  width: 9.14rem;
+  height: 30rem;
+}
+
+.control-view .control-btn {
+  width: 5rem;
+  height: 2.5rem;
+}
+
+/* 底部 */
+.outter-footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 7.35rem;
+}
+
+.outter-footer .inner-footer {
+  width: 73.14rem;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: 0rem;
+}
+
+.inner-footer {
+  text-align: center;
+}
+
+.inner-footer > h2 {
+  display: block;
+  padding-top: 2.24rem;
+  margin: 0rem;
+}
+
+/* 提示框 */
+.dialog {
+}
+
+.dialog > h2 {
+  margin: 0px;
+  padding: 0px;
+  padding-top: 1.28rem;
+  padding-left: 1.28rem;
+}
+
+.dialog > p {
+  display: block;
+  margin-top: 0.5rem;
+  padding-left: 1.28rem;
+}

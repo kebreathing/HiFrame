@@ -10,15 +10,17 @@
 }
 
 .draggable-frame {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   border: 1px dashed rgba(102, 102, 102, 1);
 }
 
 .draggable-frame .dot {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  /*border: 1px solid black;*/
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 2px 2px rgba(255, 0, 0, 0.5);
   border-radius: 100%;
 }
 
@@ -31,31 +33,42 @@
     width: 25px;
     height: 25px;
     border-radius: 100%;
-    background-color: wheat;
+    background-color: #F44336;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
     z-index: 5;
     visibility: hidden;
 }
 
 .draggable-frame > #dot1 {
-  top: -3px;
-  left: -3px;
+  top: -6px;
+  left: -6px;
   cursor: nw-resize;
 }
 
 .draggable-frame > #dot2 {
-  top: -3px;
-  right: -3px;
+  top: -6px;
+  right: -6px;
   cursor: ne-resize;
 }
 
 .draggable-frame > #dot3 {
-  bottom: -3px;
-  left: -3px;
+  bottom: -6px;
+  left: -6px;
   cursor: sw-resize;
 }
 
 .draggable-frame > #dot4 {
-  bottom: -3px;
-  right: -3px;
+  bottom: -6px;
+  right: -6px;
   cursor: se-resize;
+}
+
+.draggable-frame > .plugin-ok {
+  position: absolute;
+  right: -65px;
+  top: 0px;
+  width: 60px;
+  height: 20px;
+  border-radius: 10px;
+  outline: none;
 }

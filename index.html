@@ -2,41 +2,61 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="./css/frame.css"/>
-    <style>
-      body {
-        margin: 0;
-        padding: 0px;
-        width: 100%;
-        min-height: 100%;
-      }
-
-      .parent-view {
-        position: relative;
-        margin: 0 auto;
-        width: 90%;
-        height: 90%;
-        border: 1px solid black;
-      }
-    </style>
+    <link type="text/css" rel="stylesheet" href="./css/layout.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
   </head>
   <body>
-    <div class="parent-view" id="parent"></div>
+    <div class="outter-container">
+      <div class="inner-container">
+        <div class="frame-view" id="parent">
+          <!-- <div class="frame c-border-blue">
+            <i class="fa fa-circle dot dot-lu c-dot-blue"></i>
+            <i class="fa fa-circle dot dot-ru c-dot-blue"></i>
+            <i class="fa fa-circle dot dot-lb c-dot-blue"></i>
+            <i class="fa fa-circle dot dot-rb c-dot-blue"></i>
+          </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.js"
-			  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
-			  crossorigin="anonymous"></script>
+          <div class="frame c-border-yellow" style="top: 10rem; left: 5rem;">
+            <i class="fa fa-circle dot dot-lu c-dot-red"></i>
+            <i class="fa fa-circle dot dot-ru c-dot-yellow"></i>
+            <i class="fa fa-circle dot dot-lb c-dot-yellow"></i>
+            <i class="fa fa-circle dot dot-rb c-dot-yellow"></i>
+          </div> -->
+        </div>
+        <div class="control-view">
+          <button class="control-btn" onclick="onCreateFrame(this)">新建</button>
+          <button class="control-btn c-yellow">手动框选</button>
+          <button class="control-btn c-red" onclick="onDeleteFrame(this)">删除</button>
+          <button class="control-btn" id="btn-fix" onclick="onFixFrame(this)">位置锁定</button>
+          <button class="control-btn" id="btn-lock" onclick="onLockFrame(this)">大小锁定</button>
+          <button class="control-btn" onclick="onUpperFrame(this)">上移层</button>
+          <button class="control-btn" onclick="onLowerFrame(this)">下移层</button>
+        </div>
+      </div>
+    </div>
+    <footer class="outter-footer">
+      <div class="inner-footer">
+        <h2>为世界贡献一份爱</h2>
+      </div>
+    </footer>
+    <div class="dialog" style="display: none;">
+      <i class="fa fa-close"></i>
+      <h2>提示</h2>
+      <p>提示将在60s后消失</p>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     <script src="./js/frame.js"></script>
+    <script src="./js/frame-manager.js"></script>
+    <script src="./js/index.js"></script>
     <script>
-      // var frame = new DraggableFrame("frame", "parent")
-      // frame.init()
-      // frame.setCSS({
-      //   'top': '100px',
-      //   'left': '200px'
-      // })
-      var manager = new FrameManager()
-      manager.createFrame('frame', 'parent', {'top': '50px', 'left': '100px'})
-      manager.createFrame('frame1', 'parent', {'top': '200px', 'left': '300px'})
+      var manager = new FrameManager("parent")
+      manager.initEventListener()
+      // manager.addFrame()
     </script>
   </body>
 </html>

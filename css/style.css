@@ -1,0 +1,101 @@
+.frame-view {
+  background: rgba(255,255,255,1);
+  box-shadow: 0px 0px 4px 0px rgba(117,117,117,0.5);
+  border-radius: 0.35rem;
+}
+
+.outter-footer {
+  background: rgba(63,81,181,1);
+}
+
+.inner-footer > h2 {
+  font-size: 1.714rem;
+  color: #FFFFFF;
+}
+
+/* 可复用组件样式 */
+.frame {
+  position: absolute;
+  width: 7.14rem;
+  height: 7.14rem;
+  border:2px dashed rgba(48,63,159,0.63);
+  z-index: 5;
+}
+
+.frame > .dot {
+  position: absolute;
+}
+
+.frame > .dot-lu {
+  top: -0.428rem;
+  left: -0.428rem;
+}
+
+.frame > .dot-ru {
+  top: -0.428rem;
+  right: -0.428rem;
+}
+
+.frame > .dot-lb {
+  bottom: -0.428rem;
+  left: -0.428rem;
+}
+
+.frame > .dot-rb {
+  bottom: -0.428rem;
+  right: -0.428rem;
+}
+
+.frame > .layer {
+  position: absolute;
+  right: 0.5rem;
+  font-size: 1rem;
+}
+
+.control-btn {
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.19);
+  border-radius: 20px;
+  background: rgba(63,81,181,1);
+  color: #FFFFFF;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.dialog {
+  position: fixed;
+  right: 2rem;
+  top: 1rem;
+  width: 16.21rem;
+  height: 6.315rem;
+  background: rgba(255,255,255,1);
+  box-shadow: 0px 0px 2px 0px rgba(117,117,117,0.51);
+  border-radius: 8px;
+  opacity: 0.9;
+}
+
+.dialog h2 {
+  font-size: 1.28rem;
+  color: #000000;
+}
+
+.dialog p {
+  font-size: 1rem;
+  color: #757575;
+}
+
+.dialog i {
+  position: relative;
+  float: right;
+  top: 10px;
+  right: 10px;
+}
+
+/* 颜色 */
+.c-red { background:rgba(228,24,49,1); }
+.c-yellow { background:rgba(255,193,7,1); }
+.c-blue { background:rgba(63,81,181,1);}
+.c-dot-blue { color:rgba(48,63,159,0.73); }
+.c-dot-yellow { color:rgba(255,193,7,0.73); }
+.c-dot-red { color:rgba(228,24,49,1); }
+.c-border-blue { border-color:rgba(48,63,159,0.63); }
+.c-border-yellow { border-color:rgba(255,193,7,0.73);}
