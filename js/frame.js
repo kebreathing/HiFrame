@@ -31,15 +31,22 @@ const _FRAME_STYLE = {
   blur_dot: 'c-dot-blue'
 }
 
+const _DOT_TYPE = {
+  LEFT_UP: 'LU',
+  RIGHT_UP: 'RU',
+  LEFT_BOTTOM: 'LB',
+  RIGHT_BOTTOM: 'RB'
+}
+
 function _get_dot (id) {
   if (id.indexOf('lu') >= 0) {
-    return 0
+    return _DOT_TYPE.LEFT_UP
   } else if (id.indexOf('ru') >= 0) {
-    return 1
+    return _DOT_TYPE.RIGHT_UP
   } else if (id.indexOf('lb') >= 0) {
-    return 2
+    return _DOT_TYPE.LEFT_BOTTOM
   } else if (id.indexOf('rb') >= 0) {
-    return 3
+    return _DOT_TYPE.RIGHT_BOTTOM
   }
 }
 
@@ -91,6 +98,8 @@ class Frame {
   // 记录当前被拖动的点
   record_dot (id) {
     this.dotType = _get_dot(id)
+    // 记录当前的操作点
+    this.act_dotType = _get_dot(id)
     this.startWidth = _int(this.el.css('width'))
     this.startHeight = _int(this.el.css('height'))
   }
@@ -118,23 +127,32 @@ class Frame {
     this.el.css({'z-index': zindex})
   }
 
-  setPos (top, left) {
+  setPos (top, left, width, height) {
     if (this.isFixed) {
       console.log('已经固定: isFixed = true')
       return
     }
 
     // 框坐标设置
-    let _top = this.startY + top + 'px'
-    let _left = this.startX + left + 'px'
+    let _top = this.startY + top
+    let _left = this.startX + left
+    let _width = _int(this.el.css('width'))
+    let _height = _int(this.el.css('height'))
+
+    if (_top < 0
+      || _left < 0
+      || _left + _width > width - 5
+      || _top + _height > height - 5) {
+        return
+    }
 
     this.el.css({
-      'top': _top,
-      'left': _left
+      'top': _top  + 'px',
+      'left': _left + 'px'
     })
   }
 
-  setSize (top, left) {
+  setSize (top, left, width, height) {
     if (this.isResizable) {
       console.log('不可改变: isResizable = true')
       return
@@ -147,28 +165,49 @@ class Frame {
     var _y = that.startY
 
     // 固定位置
-    switch (that.dotType) {
-      case 0:
+    switch (that.act_dotType) {
+      case _DOT_TYPE.LEFT_UP:
         top = -top
         left = -left
+
+        if (_y - top < 0
+          || _x - left < 0
+          || _width + left < 0 || _height + top < 0) {
+          return
+        }
         that.el.css({
           'top': _y - top + 'px',
           'left': _x - left + 'px'
         })
         break;
-      case 1:
+      case _DOT_TYPE.RIGHT_UP:
         top = -top
+        if (_y - top < 0
+          || _x + left + _width > width - 5
+          || _width + left < 0 || _height + top < 0) {
+          return
+        }
         that.el.css({
           'top': _y - top + 'px'
         })
         break;
-      case 2:
+      case _DOT_TYPE.LEFT_BOTTOM:
         left = -left
+        if (_x - left < 0
+          || _y + top + _height > height - 5
+          || _width + left < 0 || _height + top < 0) {
+          return
+        }
         that.el.css({
           'left': _x - left + 'px'
         })
         break
-      case 3:
+      case _DOT_TYPE.RIGHT_BOTTOM:
+        if (_x + left + _width > width - 5
+          || _y + top + _height > height - 5
+          || _width + left < 0 || _height + top < 0) {
+          return
+        }
         break;
       default:
         console.log('add your own position function')

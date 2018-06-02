@@ -11,6 +11,8 @@ class FrameManager {
   constructor (pid) {
     this.pid = pid
     this.pel = $('#' + pid)
+    this.pwidth = _int(this.pel.css('width'))
+    this.pheight = _int(this.pel.css('height'))
 
     // 状态变量记录
     this.isInitial = false
@@ -77,15 +79,14 @@ FrameManager.prototype.initEventListener = function () {
       return
     }
 
-
     let dx = e.clientX - that.diffX
     let dy = e.clientY - that.diffY
 
     // 获取当前截点id
     if (that.isFrame) {
-      that.current_frame.setPos(dy, dx)
+      that.current_frame.setPos(dy, dx, that.pwidth, that.pheight)
     } else if (that.isDot) {
-      that.current_frame.setSize(dy, dx)
+      that.current_frame.setSize(dy, dx, that.pwidth, that.pheight)
     }
   }
 
