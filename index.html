@@ -10,10 +10,15 @@
     <div class="outter-container">
       <div class="inner-container">
         <div class="frame-view" id="parent">
+          <img id="pimg" src="" alt="底图"/>
+        </div>
+        <div class="frame-image">
+          <input type="file" id="fimg-uploader" name="files[]" multiple>
+          <button>上传图片</button>
         </div>
         <div class="control-view">
           <button class="control-btn" onclick="onCreateFrame(this)">新建</button>
-          <button class="control-btn c-yellow" onclick="onPopDialog(this)">手动框选</button>
+          <button class="control-btn c-yellow" onclick="onSelectDialog(this)">手动框选</button>
           <button class="control-btn c-red" onclick="onDeleteFrame(this)">删除</button>
           <button class="control-btn" id="btn-fix" onclick="onFixFrame(this)">位置锁定</button>
           <button class="control-btn" id="btn-lock" onclick="onLockFrame(this)">大小锁定</button>

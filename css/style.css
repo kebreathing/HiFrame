@@ -16,6 +16,8 @@
 /* 可复用组件样式 */
 .frame {
   position: absolute;
+  top: 0px;
+  left: 0px;
   width: 7.14rem;
   height: 7.14rem;
   border:2px dashed rgba(48,63,159,0.63);

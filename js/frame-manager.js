@@ -161,7 +161,22 @@ FrameManager.prototype.modifyFrameLayer = function (offset) {
   this.current_frame.setZIndex(offset)
 }
 
+FrameManager.prototype.updatePSize = function () {
+  this.pwidth = _int(this.pel.css('width'))
+  this.pheight = _int(this.pel.css('height'))
+}
 
+
+FrameManager.prototype.clear = function () {
+  // 清空当前所有框
+  this.current_id = undefined
+  this.current_frame = undefined
+  this.frameMap.forEach(frame => {
+    frame.delete()
+  })
+
+  this.frameMap.clear()
+}
 // 事件处理程序
 function onCreateFrame (e) {
   manager.addFrame()
@@ -192,7 +207,36 @@ function onLowerFrame (e) {
   manager.modifyFrameLayer(-1)
 }
 
-function onPopDialog (e) {
+// 弹出提示层
+function onSelectDialog (e) {
   var dialog = new Dialog('提示', '手动框选功能尚未开通！')
   dialog.create()
 }
+
+$(document).ready(() => {
+  $('#fimg-uploader').change(function () {
+    var reader = new FileReader()
+    reader.onload = function () {
+      // console.log(reader.result)
+      $('#pimg').attr({
+        'src': reader.result
+      })
+
+      // 上传图片要清空当前已经存在的框
+      manager.clear()
+
+      // 获取图片宽高
+      setTimeout(function () {
+        var img_width = _int($('#pimg').css('width'))
+        var img_height= _int($('#pimg').css('height'))
+        $('#parent').css({
+          'width': img_width + 'px',
+          'height': img_height + 'px'
+        })
+        manager.updatePSize()
+      }, 300)
+    }
+
+    reader.readAsDataURL(this.files[0])
+  })
+})
