@@ -116,6 +116,17 @@ FrameManager.prototype.addFrame = function () {
   this.syncControlView()
 }
 
+FrameManager.prototype.posFrame = function () {
+  if (!this.validateAction()) {
+    return
+  }
+
+  let pos = this.current_frame.get_pos()
+  let str = 'l: ' + pos.left + '; t: ' + pos.top + '; w: ' + pos.width + "; h: " + pos.height
+  var dialog = new Dialog('框位置', str)
+  dialog.create()
+}
+
 FrameManager.prototype.deleteFrame = function () {
   if (!this.validateAction()) {
     return
@@ -185,6 +196,10 @@ function onCreateFrame (e) {
 // 删除当前框
 function onDeleteFrame (e) {
   manager.deleteFrame()
+}
+
+function onPosFrame (e) {
+  manager.posFrame()
 }
 
 // 位置锁定

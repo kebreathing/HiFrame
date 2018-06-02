@@ -104,6 +104,15 @@ class Frame {
     this.startHeight = _int(this.el.css('height'))
   }
 
+  get_pos () {
+    return {
+      left: _int(this.el.css('left')),
+      top: _int(this.el.css('top')),
+      width: _int(this.el.css('width')),
+      height: _int(this.el.css('height'))
+    }
+  }
+
   get_el () {
     return this.el
   }
