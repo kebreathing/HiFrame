@@ -31,6 +31,31 @@ button {
   border: none;
 }
 
+/* 背景动画 */
+/*@keyframes dotmove {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bkg-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bkg-container span {
+  position: absolute;
+  z-index: -1;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 5vw;
+  backface-visibility: hidden;
+}*/
+
 .outter-container {
   width: 100%;
 }
