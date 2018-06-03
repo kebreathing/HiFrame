@@ -24,6 +24,9 @@ class FrameManager {
 
     // 所有框记录
     this.frameMap = new Map()
+
+    // 管理器当前状态
+    this.status = 'frame'
   }
 
   // 信息同步：非manager内容
@@ -39,6 +42,14 @@ class FrameManager {
 
   validateAction () {
     return this.current_frame !== undefined
+  }
+
+  get_status () {
+    return this.status
+  }
+
+  get_frame () {
+    return this.current_frame
   }
 }
 
@@ -103,7 +114,13 @@ FrameManager.prototype.initEventListener = function () {
   $(document).bind('mouseup', onmouseup)
 }
 
+// 添加普通的框
 FrameManager.prototype.addFrame = function () {
+  if (this.status === 'glass' && this.current_frame !== undefined) {
+    (new Dialog('提示', '放大镜只能有一个框')).create()
+    return
+  }
+
   let fid = _uuid()
   let frame = new Frame(fid, this.pid)
 
@@ -116,15 +133,27 @@ FrameManager.prototype.addFrame = function () {
   this.syncControlView()
 }
 
+// 添加放大镜的框
+FrameManager.prototype.addGlassFrame = function () {
+  if (this.status === 'glass' && this.current_frame !== undefined) {
+    (new Dialog('提示', '放大镜只能有一个框')).create()
+    return
+  }
+  let fid = _uuid()
+  let frame = new GlassFrame(fid, this.pid)
+
+  this.pel.append(frame.get_el())
+  this.current_frame = frame
+  this.current_frame.focus()
+  this.frameMap.set(fid, frame)
+}
+
 FrameManager.prototype.posFrame = function () {
   if (!this.validateAction()) {
     return
   }
 
   let pos = this.current_frame.get_pos()
-  let str = 'l: ' + pos.left + '; t: ' + pos.top + '; w: ' + pos.width + "; h: " + pos.height + ";"
-  var dialog = new Dialog('框位置', str)
-  dialog.create()
   return pos
 }
 
@@ -189,102 +218,8 @@ FrameManager.prototype.clear = function () {
 
   this.frameMap.clear()
 }
-// 事件处理程序
-function onCreateFrame (e) {
-  manager.addFrame()
+
+// 设置管理器当前管理的状态
+FrameManager.prototype.setStatus = function (status) {
+  this.status = status
 }
-
-// 删除当前框
-function onDeleteFrame (e) {
-  manager.deleteFrame()
-}
-
-function onPosFrame (e) {
-  manager.posFrame()
-}
-
-// 位置锁定
-function onFixFrame (e) {
-  e.innerHTML = manager.fixFrame() ? '位置解锁' : '位置锁定'
-}
-
-// 大小锁定
-function onLockFrame (e) {
-  e.innerHTML = manager.lockFrame() ? '大小解锁' : '大小锁定'
-}
-
-// 上移层
-function onUpperFrame (e) {
-  manager.modifyFrameLayer(1)
-}
-
-// 下移层
-function onLowerFrame (e) {
-  manager.modifyFrameLayer(-1)
-}
-
-// 截屏：获取平布
-function oncutFrame (e) {
-  // 剪切
-  var pos = manager.posFrame()
-  canvas.width = pos.width
-  canvas.height = pos.height
-  canvas.style.top = pos.top
-  canvas.style.left = pos.left
-
-  let img = document.getElementById('pimg')
-  ctx.drawImage(img, pos.left, pos.top, pos.width, pos.height, 0, 0, pos.width, pos.height)
-
-  // 显示在左边
-  var tmpsrc = canvas.toDataURL('image/png')
-  $('.display-view').css({
-    'width': pos.width + 'px',
-    'height': pos.height + 'px',
-    'display': 'block'
-  })
-  $('#dimg').attr({
-    'src': tmpsrc
-  })
-}
-
-// 弹出提示层
-function onSelectDialog (e) {
-  var dialog = new Dialog('提示', '手动框选功能尚未开通！')
-  dialog.create()
-}
-
-$(document).ready(() => {
-  // 插件管理：上传图片
-  $('#fimg-uploader').change(function () {
-    var reader = new FileReader()
-    reader.onload = function () {
-      $('#pimg').attr({
-        'src': reader.result,
-      })
-      $('#pimg').css({
-        'opacity': 1
-      })
-
-      // 上传图片要清空当前已经存在的框
-      manager.clear()
-
-      // 获取图片宽高
-      setTimeout(function () {
-        var img_width = _int($('#pimg').css('width'))
-        var img_height= _int($('#pimg').css('height'))
-        $('#parent').css({
-          'width': img_width + 'px',
-          'height': img_height + 'px'
-        })
-        manager.updatePSize()
-
-        // 修改canvas的大小
-        canvas.width = img_width
-        canvas.height = img_height
-        ctx.drawImage(document.getElementById('pimg'), 0, 0)
-      }, 300)
-    }
-
-    reader.readAsDataURL(this.files[0])
-  })
-})

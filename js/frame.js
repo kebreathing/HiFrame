@@ -20,6 +20,9 @@ const _FRAME_STR = {
   },
   layer: function (id, text) {
     return '<span class="layer c-dot-blue">' + text + '</span>'
+  },
+  glass: function (id) {
+    return '<div class="glass-view" id="' + id + '"><img id="gimg" src=""></div>'
   }
 }
 
@@ -59,7 +62,7 @@ class Frame {
     this.id = id
     this.pid = pid
 
-    // 是否固定
+    // 是否固定 isResizable表示是否已经固定大小
     this.isResizable = false
     this.isFixed = false
     this.create()
@@ -74,19 +77,19 @@ class Frame {
     var dru = $(_FRAME_STR.dotru('dotru_' + this.id))
     var dlb = $(_FRAME_STR.dotlb('dotlb_' + this.id))
     var drb = $(_FRAME_STR.dotrb('dotrb_' + this.id))
-    var slayer = $(_FRAME_STR.layer('span_' + this.id, 5))
+    var txtlayer = $(_FRAME_STR.layer('span_' + this.id, 5))
     el.append(dlu)
         .append(dru)
           .append(dlb)
             .append(drb)
-              .append(slayer)
+              .append(txtlayer)
 
     this.el = el
     this.dlu = dlu
     this.dru = dru
-    this.dlb = dlu
+    this.dlb = dlb
     this.drb = drb
-    this.slayer = slayer
+    this.txtlayer = txtlayer
   }
 
   // 记录frame的当前坐标
@@ -132,7 +135,7 @@ class Frame {
       return
     }
 
-    this.slayer.text(zindex)
+    this.txtlayer.text(zindex)
     this.el.css({'z-index': zindex})
   }
 
@@ -246,4 +249,35 @@ Frame.prototype.focus = function (cb) {
 // 删除
 Frame.prototype.delete = function (cb) {
   $('#f_' + this.id).remove()
+}
+
+// 扩展类：放大镜，固定大小
+class GlassFrame extends Frame {
+  constructor (id, pid) {
+    super(id, pid)
+
+    // 大小固定
+    this.isResizable = true
+    this.isFixed = false
+  }
+
+  create () {
+    super.create()
+    this.glassid = 'glass_'  + this.id
+    var glassv = $(_FRAME_STR.glass(this.glassid))
+
+    this.glassv = glassv
+    this.el.append(glassv)
+
+    this.dlu.css('display', 'none')
+    this.dru.css('display', 'none')
+    this.dlb.css('display', 'none')
+    this.drb.css('display', 'none')
+    this.txtlayer.css('display', 'none')
+    // this.el.addClass('glass-frame')
+  }
+
+  get_glassid () {
+    return this.glassid
+  }
 }

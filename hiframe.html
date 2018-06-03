@@ -31,7 +31,8 @@
           <button class="control-btn" id="btn-lock" onclick="onLockFrame(this)">大小锁定</button>
           <button class="control-btn" onclick="onUpperFrame(this)">上移层</button>
           <button class="control-btn" onclick="onLowerFrame(this)">下移层</button>
-          <button class="control-btn" onclick="oncutFrame(this)">ex:截屏</button>
+          <button class="control-btn" onclick="oncutFrame(this)" style="width:5.5rem;font-size:0.8rem;">扩展：截屏</button>
+          <button class="control-btn" onclick="onglassFrame(this)" style="width:5.5rem;font-size:0.8rem;">扩展: 放大镜</button>
         </div>
       </div>
     </div>
@@ -53,6 +54,7 @@
     <script src="./js/dialog.js"></script>
     <script src="./js/frame.js"></script>
     <script src="./js/frame-manager.js"></script>
+    <script src="./js/hiframe.js"></script>
     <script>
       // HiFrame 管理器
       var manager = new FrameManager("parent")
