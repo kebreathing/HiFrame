@@ -69,7 +69,7 @@ function onglassFrame (e) {
   switch (status) {
     case 'frame':
       status = 'glass'
-      txt = '开启：放大镜'
+      txt = '开启:放大镜'
       manager.setStatus('glass')
       manager.addGlassFrame()
       canvas.width = 200
@@ -90,7 +90,7 @@ function onglassFrame (e) {
       break;
     case 'glass':
       status = 'frame'
-      txt = '关闭：放大镜'
+      txt = '关闭:放大镜'
       window.clearInterval(window.glassitvl)
       manager.clear()
       break;
