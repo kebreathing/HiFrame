@@ -6,8 +6,33 @@ Draggable-frame是一款以JS+Jquery编写的可拖拽式多功能的“截屏�
 4. 易修改-Easy-changable：暴露对应接口，用户可实现直接修改框样式；
 5. 高度可管理性-Highly-Managable：通过Manager对所有实例化的框进行管理，以满足多种业务场景；
 
-# 使用说明
+## 使用说明
+* 初始化
+    // 全局引入HiFrame管理器，参数为绑定的父元素id
+    var manager = new FrameManager("paren")
+    // 初始化事件监听：鼠标点击、移动、松开
+    manager.initEventListener()
+    // 如果需要截屏或放大镜功能，需要初始化canvas
+    var canvas = document.getElementById('pcanvas')
+    var ctx = canvas.getContext('2d')
+* 添加新的框
+    manager.addFrame()    // 默认出现在被绑定元素的左上角
+* 删除当前框
+    manager.deleteFrame() // 删除当前处于活跃状态的框
+* 固定当前框的位置
+    manager.fixFrame()    // 固定当前处于活跃状态的框的位置
+* 固定当前框的大小
+    manager.lockFrame()   // 固定当前处于活跃状态的框的大小
+* 调整框的层级
+    manager.modifyFrameLayer(1)   // 上移
+    manager.modifyFrameLayer(-1)  // 下移
+* 获得当前框的位置信息
+    manager.posFrame()    // 返回对象 {left: '', top: '', width: '', height: ''}
+* 清空管理前当前的所有框
+    manager.clear()
+* 截屏、放大镜是当前功能的额外扩展，详细内容请直接阅读源码
 
+## 功能描述
 | Single Frame 单体框功能说明
 描述框具备的功能：
 1. 初始大小可调节，框的宽高可以自由调节，最高抽象为宽高都为0。
@@ -34,5 +59,5 @@ Draggable-frame是一款以JS+Jquery编写的可拖拽式多功能的“截屏�
 
 | Implementation
 实现原理：
-1. 定义不同操作函数
-2. 由父节点进行事件代理 delegate (由根元素进行代理的好处在于能够协调好不同的事件)
+1. 设计模式。
+2. 放大镜部分使用canvas + setInterval定时器实现，canvas会实时刷新。

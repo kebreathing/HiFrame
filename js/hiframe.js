@@ -38,6 +38,11 @@ function onLowerFrame (e) {
 
 // 截屏：获取平布
 function oncutFrame (e) {
+  if ($('#pimg').attr('src').length <= 0) {
+
+    (new Dialog('提示', '截屏：请先上传图片。')).create()
+    return
+  }
   // 剪切
   var pos = manager.posFrame()
   canvas.width = pos.width
@@ -64,6 +69,11 @@ function oncutFrame (e) {
 
 // 放大镜
 function onglassFrame (e) {
+  if ($('#pimg').attr('src').length <= 0) {
+
+    (new Dialog('提示', '放大镜：请先上传图片。')).create()
+    return
+  }
   var status = manager.get_status()
   var txt
   switch (status) {
