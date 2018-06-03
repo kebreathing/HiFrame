@@ -38,19 +38,29 @@ function onLowerFrame (e) {
 
 // 截屏：获取平布
 function oncutFrame (e) {
+  // 判断是有图片
   if ($('#pimg').attr('src').length <= 0) {
-
     (new Dialog('提示', '截屏：请先上传图片。')).create()
     return
   }
+
+  // 判断当前类型
+  if (manager.get_status() === 'glass') {
+    window.clearInterval(window.glassitvl)
+    manager.clear()
+    return
+  }
+
+  // 判断是否有框
+  if (manager.get_frame() === undefined) {
+    (new Dialog('提示', '截屏：请先框选图片内容。')).create()
+    return
+  }
+
   // 剪切
   var pos = manager.posFrame()
   canvas.width = pos.width
   canvas.height = pos.height
-  // canvas的位置可以不用发生变化
-  // canvas.style.top = pos.top
-  // canvas.style.left = pos.left
-
   let img = document.getElementById('pimg')
   ctx.drawImage(img,
     pos.left, pos.top, pos.width, pos.height,
@@ -70,12 +80,13 @@ function oncutFrame (e) {
 // 放大镜
 function onglassFrame (e) {
   if ($('#pimg').attr('src').length <= 0) {
-
     (new Dialog('提示', '放大镜：请先上传图片。')).create()
     return
   }
+
   var status = manager.get_status()
   var txt
+  manager.clear()
   switch (status) {
     case 'frame':
       status = 'glass'
@@ -102,7 +113,6 @@ function onglassFrame (e) {
       status = 'frame'
       txt = '关闭:放大镜'
       window.clearInterval(window.glassitvl)
-      manager.clear()
       break;
     default:
       console.log('可自定义添加新的状态')

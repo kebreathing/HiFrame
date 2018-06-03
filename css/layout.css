@@ -103,7 +103,7 @@ button {
 .inner-container .control-view {
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: 5rem;
   float: right;
   display: flex;
   flex-direction: column;

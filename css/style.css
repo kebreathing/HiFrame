@@ -94,6 +94,11 @@ body {
   margin-top: 1rem;
 }
 
+.f-btn {
+  width: 5.5rem;
+  font-size: 0.5rem;
+}
+
 .dialog {
   position: fixed;
   right: 2rem;
@@ -127,6 +132,10 @@ body {
 .c-red { background:rgba(228,24,49,1); }
 .c-yellow { background:rgba(255,193,7,1); }
 .c-blue { background:rgba(63,81,181,1);}
+.c-gray { background: rgba(204, 204, 204, 1); }
+.c-wheat { background-color: #FCF3CA; }
+.c-pink { background-color: #EF7B7B; }
+.c-qian-blue { background-color: #C4EADA; }
 .c-dot-blue { color:rgba(48,63,159,0.73); }
 .c-dot-yellow { color:rgba(255,193,7,0.73); }
 .c-dot-red { color:rgba(228,24,49,1); }
