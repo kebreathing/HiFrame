@@ -122,9 +122,10 @@ FrameManager.prototype.posFrame = function () {
   }
 
   let pos = this.current_frame.get_pos()
-  let str = 'l: ' + pos.left + '; t: ' + pos.top + '; w: ' + pos.width + "; h: " + pos.height
+  let str = 'l: ' + pos.left + '; t: ' + pos.top + '; w: ' + pos.width + "; h: " + pos.height + ";"
   var dialog = new Dialog('框位置', str)
   dialog.create()
+  return pos
 }
 
 FrameManager.prototype.deleteFrame = function () {
@@ -222,6 +223,30 @@ function onLowerFrame (e) {
   manager.modifyFrameLayer(-1)
 }
 
+// 截屏：获取平布
+function oncutFrame (e) {
+  // 剪切
+  var pos = manager.posFrame()
+  canvas.width = pos.width
+  canvas.height = pos.height
+  canvas.style.top = pos.top
+  canvas.style.left = pos.left
+
+  let img = document.getElementById('pimg')
+  ctx.drawImage(img, pos.left, pos.top, pos.width, pos.height, 0, 0, pos.width, pos.height)
+
+  // 显示在左边
+  var tmpsrc = canvas.toDataURL('image/png')
+  $('.display-view').css({
+    'width': pos.width + 'px',
+    'height': pos.height + 'px',
+    'display': 'block'
+  })
+  $('#dimg').attr({
+    'src': tmpsrc
+  })
+}
+
 // 弹出提示层
 function onSelectDialog (e) {
   var dialog = new Dialog('提示', '手动框选功能尚未开通！')
@@ -229,12 +254,15 @@ function onSelectDialog (e) {
 }
 
 $(document).ready(() => {
+  // 插件管理：上传图片
   $('#fimg-uploader').change(function () {
     var reader = new FileReader()
     reader.onload = function () {
-      // console.log(reader.result)
       $('#pimg').attr({
-        'src': reader.result
+        'src': reader.result,
+      })
+      $('#pimg').css({
+        'opacity': 1
       })
 
       // 上传图片要清空当前已经存在的框
@@ -249,6 +277,11 @@ $(document).ready(() => {
           'height': img_height + 'px'
         })
         manager.updatePSize()
+
+        // 修改canvas的大小
+        canvas.width = img_width
+        canvas.height = img_height
+        ctx.drawImage(document.getElementById('pimg'), 0, 0)
       }, 300)
     }
 

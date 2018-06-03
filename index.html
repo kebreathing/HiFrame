@@ -9,8 +9,14 @@
   <body>
     <div class="outter-container">
       <div class="inner-container">
+        <div class="display-view">
+          <img id="dimg" src="" alt="截图"/>
+          <!-- <button class="control-btn">下载</button> -->
+          <button class="control-btn" onclick="$('.display-view').css('display', 'none')">关闭</button>
+        </div>
         <div class="frame-view" id="parent">
-          <img id="pimg" src="" alt="底图"/>
+          <canvas id="pcanvas" width="0" height="0"></canvas>
+          <img id="pimg" src="" alt="底图" style="opacity: 0"/>
         </div>
         <div class="frame-image">
           <input type="file" id="fimg-uploader" name="files[]" multiple>
@@ -25,6 +31,7 @@
           <button class="control-btn" id="btn-lock" onclick="onLockFrame(this)">大小锁定</button>
           <button class="control-btn" onclick="onUpperFrame(this)">上移层</button>
           <button class="control-btn" onclick="onLowerFrame(this)">下移层</button>
+          <button class="control-btn" onclick="oncutFrame(this)">ex:截屏</button>
         </div>
       </div>
     </div>
@@ -47,9 +54,12 @@
     <script src="./js/frame.js"></script>
     <script src="./js/frame-manager.js"></script>
     <script>
+      // HiFrame 管理器
       var manager = new FrameManager("parent")
       manager.initEventListener()
-      // manager.addFrame()
+      // Canvas
+      var canvas = document.getElementById('pcanvas')
+      var ctx = canvas.getContext('2d')
     </script>
   </body>
 </html>
