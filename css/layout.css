@@ -162,7 +162,7 @@ button {
 /* 展示框 */
 .display-view {
   position: fixed;
-  display: block;
+  display: none;
   top: 50px;
   left: 50px;
   width: 100px;
