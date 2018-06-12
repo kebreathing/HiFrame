@@ -97,8 +97,9 @@ function onglassFrame (e) {
       canvas.height = 200
       window.glassitvl = setInterval(function () {
         let pos = manager.posFrame()
-        // 截取图片块
         let img = document.getElementById('pimg')
+
+        ctx.clearRect(0, 0, pos.width * 2, pos.height * 2)
         ctx.drawImage(img,
           pos.left, pos.top, pos.width, pos.height,
           0, 0, pos.width * 2, pos.height * 2)

@@ -77,3 +77,7 @@ Draggable-frame是一款以JS+Jquery编写的可拖拽式多功能的“截屏�
 实现原理：
 1. 设计模式。
 2. 放大镜部分使用canvas + setInterval定时器实现，canvas会实时刷新。
+
+## 关于
+如果大家有发现bug或者有新的需求，烦请直接联系我~我收到后会第一时间反馈哒！
+邮箱：up_chris@qq.com or kebreathing@gmail.com
